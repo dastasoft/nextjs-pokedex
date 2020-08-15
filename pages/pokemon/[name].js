@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import DetailedEntry from '../../components/detailedEntry';
 import QueryHandler from '../../components/queryHandler';
+import { getInitialPokemonList } from '../../lib/pokemon';
 
 const fetchPokemonByName = async (key, name) => {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
@@ -35,14 +36,10 @@ export default function Pokemon({ name, pokemonData }) {
 }
 
 export async function getStaticPaths() {
+  const paths = getInitialPokemonList();
+
   return {
-    paths: [
-      {
-        params: {
-          name: 'charmander'
-        }
-      }
-    ],
+    paths,
     fallback: true
   };
 }
