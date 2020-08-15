@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-boilerplate",
+  "name": "nextjs-pokedex",
   "version": "1.0.0",
-  "description": "A NextJS boilerplate with tailwindcss, eslint and prettier",
+  "description": "A NextJS Pokedex",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -18,9 +18,11 @@
   "author": "dastasoft",
   "license": "ISC",
   "dependencies": {
+    "@bit/dastag.ui-components.spinner": "^0.0.1",
     "next": "^9.5.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-query": "^2.5.14"
   },
   "devDependencies": {
     "eslint": "^7.6.0",
@@ -33,6 +35,7 @@
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.0.5",
+    "react-query-devtools": "^2.4.2",
     "tailwindcss": "^1.6.2"
   }
 }
