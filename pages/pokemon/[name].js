@@ -39,7 +39,7 @@ export async function getStaticPaths() {
     paths: [
       {
         params: {
-          name: ''
+          name: 'charmander'
         }
       }
     ],
