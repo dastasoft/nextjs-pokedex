@@ -3,7 +3,7 @@ import { usePaginatedQuery } from 'react-query';
 import { ReactQueryDevtools } from 'react-query-devtools';
 
 import QueryHandler from '../components/queryHandler';
-import ExpoEntry from '../containers/expoEntry';
+import ExpoEntry from '../components/expoEntry';
 
 const fetchPokemons = async (key, page, limit) => {
   const offset = (page - 1) * limit;
