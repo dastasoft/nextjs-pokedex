@@ -2,14 +2,13 @@ import { useQuery } from 'react-query';
 
 import QueryHandler from './queryHandler';
 import Entry from './entry';
+import { fetchPokemonByName } from '../lib/querys';
 
-const fetchEntry = async (key, url) => {
-  const res = await fetch(url);
-  return res.json();
-};
-
-export default function ExpoEntry({ url }) {
-  const { data, status } = useQuery(['entry', url], fetchEntry);
+export default function ExpoEntry({ name }) {
+  const { data, status } = useQuery(
+    ['fetchPokemonByName', name],
+    fetchPokemonByName
+  );
 
   return (
     <QueryHandler status={status}>

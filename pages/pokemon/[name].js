@@ -4,15 +4,11 @@ import Link from 'next/link';
 import DetailedEntry from '../../components/detailedEntry';
 import QueryHandler from '../../components/queryHandler';
 import { getInitialPokemonList } from '../../lib/pokemon';
-
-const fetchPokemonByName = async (key, name) => {
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-  return res.json();
-};
+import { fetchPokemonByName } from '../../lib/querys';
 
 export default function Pokemon({ name, pokemonData }) {
   const { data, status } = useQuery(
-    ['pokemonByName', name],
+    ['fetchPokemonByName', name],
     fetchPokemonByName,
     {
       initialData: pokemonData
@@ -36,7 +32,9 @@ export default function Pokemon({ name, pokemonData }) {
 }
 
 export async function getStaticPaths() {
-  const paths = getInitialPokemonList();
+  const res = await fetch('https://pokeapi.co/api/v2/pokemon/');
+  const initialPokemonList = await res.json();
+  const paths = getInitialPokemonList(initialPokemonList);
 
   return {
     paths,

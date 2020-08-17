@@ -1,17 +1,11 @@
 import { useState, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import { ReactQueryDevtools } from 'react-query-devtools';
 import Head from 'next/head';
 
 import QueryHandler from '../components/queryHandler';
 import ExpoEntry from '../components/expoEntry';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
-
-const fetchPokemons = async (key, next) => {
-  const url = next ? next : 'https://pokeapi.co/api/v2/pokemon/';
-  const res = await fetch(url);
-  return res.json();
-};
+import { fetchPokemons } from '../lib/querys';
 
 export default function Home({ initialPokemonList }) {
   const [enableFetchMore, setEnableFetchMore] = useState(false);
@@ -23,7 +17,7 @@ export default function Home({ initialPokemonList }) {
     isFetchingMore,
     fetchMore,
     canFetchMore
-  } = useInfiniteQuery('pokemonList', fetchPokemons, {
+  } = useInfiniteQuery('fetchPokemons', fetchPokemons, {
     initialData: [initialPokemonList],
     getFetchMore: lastGroup => lastGroup?.next
   });
@@ -51,8 +45,8 @@ export default function Home({ initialPokemonList }) {
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {data.map((group, i) => (
               <React.Fragment key={i}>
-                {group?.results.map(({ name, url }) => {
-                  return <ExpoEntry key={name} url={url} />;
+                {group?.results.map(({ name }) => {
+                  return <ExpoEntry key={name} name={name} />;
                 })}
               </React.Fragment>
             ))}
@@ -77,7 +71,6 @@ export default function Home({ initialPokemonList }) {
           </div>
         </QueryHandler>
       </div>
-      <ReactQueryDevtools initialIsOpen={false} />
     </div>
   );
 }
